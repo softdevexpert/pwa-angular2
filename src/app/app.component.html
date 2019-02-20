@@ -1,18 +1,23 @@
-<mat-toolbar  color="primary">
-  <mat-toolbar-row>
-    <span>JS-jargon</span>
-  </mat-toolbar-row>
-</mat-toolbar>
-<main>
-  <mat-card *ngFor="let item of items">
-    <mat-card-header>
-      <mat-card-title>{{item.name}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      {{item.description}}
-    </mat-card-content>
-    <mat-card-actions>
-      <a  mat-raised-button  href="{{item.url}}"  color="primary">More</a>
-    </mat-card-actions>
-  </mat-card>
-</main>
+<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/">Home</a>
+    <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav>
+
+<!-- main app container -->
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- credits -->
+<div class="text-center">
+
+</div>
