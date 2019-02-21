@@ -21,7 +21,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // authenticate - public
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
                 const user = users.find(x => x.username === request.body.username && x.password === request.body.password);
-                if (!user) return error('Username or password is incorrect');
+                if (!user) { return error('Username or password is incorrect'); }
                 return ok({
                     id: user.id,
                     username: user.username,
@@ -33,14 +33,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // get all users
             if (request.url.endsWith('/users') && request.method === 'GET') {
-                if (!isLoggedIn) return unauthorised();
+                if (!isLoggedIn) { return unauthorised(); }
                 return ok(users);
             }
 
             // pass through any requests not handled above
             return next.handle(request);
         }))
-        // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
         .pipe(materialize())
         .pipe(delay(500))
         .pipe(dematerialize());

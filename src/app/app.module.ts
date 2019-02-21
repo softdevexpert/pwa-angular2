@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import {ErrorInterceptor, JwtInterceptor} from './_helpers';
+import {ErrorInterceptor, fakeBackendProvider, JwtInterceptor} from './_helpers';
 import {LoginComponent} from './login';
 import {HomeComponent} from './home';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -35,6 +35,9 @@ import {ReactiveFormsModule} from '@angular/forms';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })
